@@ -4,17 +4,27 @@ namespace CSharp_TicTacToe.classes
     public class TicTacToe
     {
         //Fields
-        private char[,] playingField; //Comma is used to declare 2D array in C#
+        private string[,] playingField; //Comma is used to declare 2D array in C#
 
         //Constructor
         public TicTacToe()
         {
-            this.playingField = new char[11,11]; //Used to draw field
+            this.playingField = new string[11,11]; //Used to draw field
             for(int row=0; row < playingField.GetLength(0); row++) //Goes through 1st dimension
             {
                 for(int col=0; col < playingField.GetLength(1); col++) //Goes through 2nd dimension
                 {
-                    Console.WriteLine($"Row: {row} | Column {col}");
+                    if((col+1) % 4 == 0 && (col+1) != 12)
+                    {
+                        playingField[row, col] = "|";
+                    } else if(row == 3 || row == 7)
+                    {
+                        playingField[row, col] = "-";
+                    }
+                    else
+                    {
+                        playingField[row, col] = " ";
+                    }
                 }
             }
         }
@@ -33,7 +43,14 @@ namespace CSharp_TicTacToe.classes
 
         private void DrawGame()
         {
-
+            for(int i=0; i < this.playingField.GetLength(0); i++) //1st Dimension
+            {
+                for(int j=0; j < this.playingField.GetLength(1); j++) //2nd Dimension
+                {
+                    Console.Write(playingField[i, j]);
+                }
+                Console.WriteLine();
+            }
         }
     }
 }
